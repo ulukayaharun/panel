@@ -24,7 +24,7 @@ class AddingUrl:
     def add_link(self, link):
         timestamp = datetime.now()
         self.link_df.loc[len(self.link_df)] = [link, timestamp]
-        self.save_to_database("url")
+        self.save_to_database(add_url_table_name)
 
     def save_to_database(self, table_name):
         try:
@@ -73,7 +73,7 @@ class WordFrequencies:
         report.to_sql('data',engine,if_exists="replace",index=False)
 
     def calculate_word_frequencies(engine, n: int):
-        data = pd.read_sql_table("data", engine) 
+        data = pd.read_sql_table(datas_table_name, engine) 
         dict_address = {}
         for address in data["keys"]:
             address = str(address).split("/")[-1].split("-") #Keşfetten çekilen adresin
@@ -88,7 +88,7 @@ class WordFrequencies:
         #Büyükten küçüğe en çok tekrar eden "n" kelime olan listeye dönüşür.
         sorted_list = sorted(dict_address.items(), key=lambda t: t[1], reverse=True)[:n]
         df_address = pd.DataFrame(data=sorted_list, columns=["Kelimeler", "Tekrar Sayilari"])
-        df_address.to_sql("word_frequencies", engine, if_exists="replace", index=False)
+        df_address.to_sql(word_frequencies_table_name, engine, if_exists="replace", index=False)
         return df_address
 
 class NewsCounter:
