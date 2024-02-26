@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelime Tekrar Sayilari</title>
+</head>
+<body>
+    <h4>Keşfetteki URL'lerden En Çok Tekrar Eden Kelime Bulucu</h4>
+    <form method="POST">
+        <label for="platform">Haber Sitesi (örnek: posta.com.tr):</label><br>
+        <input type="text" id="platform" name="platform" required pattern=".*\.com.*"><br><br>
+        
+        <label for="start_date">Başlangiç Tarihi: </label><br>
+        <input type="date" id="start_date" name="start_date" required><br><br>
+        
+        <label for="end_date">Bitiş Tarihi: </label><br>
+        <input type="date" id="end_date" name="end_date" required><br><br>
+        
+        <label for="n">En çok tekrar eden kaç kelime istediğinizi giriniz:</label><br>
+        <input type="number" id="n" name="n" required><br><br>
+        
+        <label for="row_limit">Hesaplanacak URL sayısı:</label><br>
+        <input type="number" id="row_limit" name="row_limit" required><br><br>
+        
+        <button type="submit">Gönder</button>
+    </form>
+    <br>
+    <form action="/">
+        <button type="submit">Anasayfaya Dön</button>
+    </form>
+    <br>
+    <div>
+        {{ table_html|safe }}
+    </div>
+</body>
+</html>
